@@ -1,8 +1,19 @@
 /* Stylesheet by Xinyi Liu, 2017 */
 #mapDiv {
-  min-height: 250px;
-  max-height: 250px;
   margin-bottom: 20px;
+  height: 250px;
+}
+
+.map {
+    margin: 0px 0 10px 0px;
+    height: 450px;
+    width: 700px
+}
+
+.regions {
+    stroke:#fcfcfc;
+    stroke-width: 0.5px;
+    stroke-linecap: round;
 }
 
 #resultsFiltersDiv {
@@ -18,8 +29,12 @@
   margin-top: 65px;
 }
 
-.col-sm-4, .col-sm-8 {
+.col-sm-4 {
   float: left;
+}
+
+.col-sm-8 {
+  float: right;
 }
 
 body > .container {
