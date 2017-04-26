@@ -2,174 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="shortcut icon" href="../../bootstrap_v3/docs-assets/ico/favicon.png">
-
-		<title>Easy Flight</title>
-
-		<!-- Bootstrap core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this project -->
+		<meta name="viewport" content="width=device-width">
+		<title>Tornado Alley</title>
+		<link rel="icon" href="/images/tornado.png">
 		<link rel="stylesheet" href="css/style.css">
-
-		<!-- Bootstrap-map-js -->
-    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css">
-    <link rel="stylesheet" type="application/js" href="../../css/bootstrap.css.map">
-
+		<link href="https://fonts.googleapis.com/css?family=Raleway|Roboto" rel="stylesheet">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 	</head>
 
-	<body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
-		  <div class="container">
-			  <div class="navbar-header">
-				  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					  <span class="icon-bar"></span>
-					  <span class="icon-bar"></span>
-					  <span class="icon-bar"></span>
-				  </button>
-				  <a class="navbar-brand" href="#">EasyFlight</a>
-			  </div>
-			  <div class="collapse navbar-collapse">
-				  <ul class="nav navbar-nav navbar-right">
-					  <li><a href="#about">About</a></li>
-					  <li><a href="#contact">Content</a></li>
-				  </ul>
-			  </div><!--/.nav-collapse -->
-		  </div>
-	  </div>
-
-	  <div class="container">
-
-		  <div class="row">
-			  <div class="col-xs-12">
-				  <div class="page-header">
-					  <h2>Don't want to wait? Choose a flight with records of punctuality!</h2>
-					  <p class="lead">Explore dependable flying service.</p>
-				  </div>
-			  </div>
-		  </div>
-
-		  <div class="row">
-			  <h4 id="mapTitle"></h4>
-			  <br>
-		  </div>
-
-		  <div class="row">
-			  <div class="col-sm-4">
-					//Filter list
-				  <div id="resultsFiltersDiv">
-						<div id="Cjn7-rating" class="Common-Results-Filters-Filter Common-Results-Filters-ValueSetFilter rating flat-redesign" js-component="true">
-              <div class="filterHead dd">
-                <span id="Cjn7-rating-title" class="filterSectionTitle">
-                Review Score
-                </span>
-                <a id="Cjn7-rating-reset" tabindex="0" class="filterSectionReset" data-tooltip-showall="Show all review scores" data-tooltip-clearall="Clear all review scores" js-component="true">Show all</a>
-             </div>
-             <div id="RwYE" class="Common-Widgets-Loader-Loader " style="height: 20px;line-height:20px">
-               <span class="dot dot0" style="width:10px;height:10px;"></span><span class="dot dot1" style="width:10px;height:10px;"></span><span class="dot dot2" style="width:10px;height:10px;"></span> </div>
-               <div id="Cjn7-rating-content" class="filterContent">
-                 <div class="filterOptions " id="Cjn7-rating-options" role="list">
-                   <li id="Cjn7-rating-4562-excellent" class="Common-Results-Filters-ValueSetFilterItem flat-redesign" data-name="excellent" data-log="" role="listitem" js-component="true" aria-disabled="false" aria-hidden="false">
-                   <div class="priceBox">
-                   <span class="funnel" title=""></span>
-                   <a id="Cjn7-rating-4562-excellent-count" href="javascript:void(0)" class="count" data-count="157" tabindex="-1">(<span>190</span>)</a>
-                 </div>
-                 <div class="filterOptionCheckboxOuter">
-                   <div class="filterOptionCheckboxInner">
-                   <span class="Common-Widgets-Checkbox-Checkbox flat-redesign">
-                     <input id="Cjn7-rating-4562-excellent-check" type="checkbox" name="excellent" value="" aria-checked="true" aria-disabled="false" aria-labelledby="Cjn7-rating-4562-excellent-check-label">
-                     <label id="Cjn7-rating-4562-excellent-check-label" for="Cjn7-rating-4562-excellent-check" class="label" data-name="excellent">Excellent</label>
-                   </span>
-                   <a id="Cjn7-rating-4562-excellent-only" href="javascript:void(0)" class="only">only</a>
-                </div>
-            </div>
-            </li><li id="Cjn7-rating-4075-good" class="Common-Results-Filters-ValueSetFilterItem flat-redesign" data-name="good" data-log="" role="listitem" js-component="true" aria-disabled="false" aria-hidden="false">
-          <div class="priceBox">
-            <span class="funnel" title=""></span>
-            <a id="Cjn7-rating-4075-good-count" href="javascript:void(0)" class="count" data-count="79" tabindex="-1">(<span>97</span>)</a>
-          </div>
-          <div class="filterOptionCheckboxOuter">
-            <div class="filterOptionCheckboxInner">
-              <span class="Common-Widgets-Checkbox-Checkbox flat-redesign">
-                <input id="Cjn7-rating-4075-good-check" type="checkbox" name="good" value="" aria-checked="true" aria-disabled="false" aria-labelledby="Cjn7-rating-4075-good-check-label">
-                <label id="Cjn7-rating-4075-good-check-label" for="Cjn7-rating-4075-good-check" class="label" data-name="good">Good</label>
-              </span>
-              <a id="Cjn7-rating-4075-good-only" href="javascript:void(0)" class="only">only</a>
-            </div>
-          </div>
-          </li><li id="Cjn7-rating-1969-okay" class="Common-Results-Filters-ValueSetFilterItem flat-redesign" data-name="okay" data-log="" role="listitem" js-component="true" aria-disabled="false" aria-hidden="false">
-          <div class="priceBox">
-<span class="funnel" title=""></span>
-<a id="Cjn7-rating-1969-okay-count" href="javascript:void(0)" class="count" data-count="8" tabindex="-1">(<span>14</span>)</a>
-</div>
-<div class="filterOptionCheckboxOuter">
-<div class="filterOptionCheckboxInner">
-<span class="Common-Widgets-Checkbox-Checkbox flat-redesign">
-<input id="Cjn7-rating-1969-okay-check" type="checkbox" name="okay" value="" aria-checked="true" aria-disabled="false" aria-labelledby="Cjn7-rating-1969-okay-check-label">
-<label id="Cjn7-rating-1969-okay-check-label" for="Cjn7-rating-1969-okay-check" class="label" data-name="okay">Okay</label>
-</span>
-<a id="Cjn7-rating-1969-okay-only" href="javascript:void(0)" class="only">only</a>
-</div>
-</div>
-</li><li id="Cjn7-rating-1061-mediocre" class="Common-Results-Filters-ValueSetFilterItem flat-redesign" data-name="mediocre" data-log="" role="listitem" js-component="true" aria-disabled="false" aria-hidden="false">
-<div class="priceBox">
-<span class="funnel" title=""></span>
-<a id="Cjn7-rating-1061-mediocre-count" href="javascript:void(0)" class="count" data-count="0" tabindex="-1">(<span>1</span>)</a>
-</div>
-<div class="filterOptionCheckboxOuter">
-<div class="filterOptionCheckboxInner">
-<span class="Common-Widgets-Checkbox-Checkbox flat-redesign">
-<input id="Cjn7-rating-1061-mediocre-check" type="checkbox" name="mediocre" value="" aria-checked="true" aria-disabled="false" aria-labelledby="Cjn7-rating-1061-mediocre-check-label">
-<label id="Cjn7-rating-1061-mediocre-check-label" for="Cjn7-rating-1061-mediocre-check" class="label" data-name="mediocre">Mediocre</label>
-</span>
-<a id="Cjn7-rating-1061-mediocre-only" href="javascript:void(0)" class="only">only</a>
-</div>
-</div>
-</li><li id="Cjn7-rating-5853-horrible" class="Common-Results-Filters-ValueSetFilterItem flat-redesign Disabled" data-name="horrible" data-log="" role="listitem" js-component="true" aria-disabled="true" aria-hidden="false">
-<div class="priceBox">
-<span class="funnel" title=""></span>
-<a id="Cjn7-rating-5853-horrible-count" href="javascript:void(0)" class="count" data-count="0" tabindex="-1">(<span>0</span>)</a>
-</div>
-<div class="filterOptionCheckboxOuter">
-<div class="filterOptionCheckboxInner">
-<span class="Common-Widgets-Checkbox-Checkbox flat-redesign Disabled">
-<input id="Cjn7-rating-5853-horrible-check" type="checkbox" name="horrible" value="" aria-checked="false" aria-disabled="false" aria-labelledby="Cjn7-rating-5853-horrible-check-label">
-<label id="Cjn7-rating-5853-horrible-check-label" for="Cjn7-rating-5853-horrible-check" class="label" data-name="horrible">Poor</label>
-</span>
-<a id="Cjn7-rating-5853-horrible-only" href="javascript:void(0)" class="only">only</a>
-</div>
-</div>
-</li></div>
-<div class="metaOptions" id="Cjn7-rating-meta"></div>
-</div>
-</div> <!--end of filter list-->
-
-					</div>
-			  </div>
-			  <div class="col-sm-8">
-				  <!-- Bootstrap-map-js -->
-				  <div id="mapDiv" class="mapDiv">
-					</div>
-			  </div>
-		  </div>
-
-	  </div><!-- /.container -->
-
-		<!--put your external script links here-->
+	<body id='myBody'>
+		<div class="container-fluid">
+    		<div class="row">
+    			<div id="mapWindow" class="col-sm-12 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-0"><div id="map"></div></div>
+        	</div>
+		</div>
+		
 		<script type="text/javascript" src="lib/jquery-3.1.1.js"></script>
-		<script src="//d3js.org/d3.v3.min.js"></script>
-		<script src="//d3js.org/topojson.v1.min.js"></script>
-		<script type="text/javascript" src="lib/d3.js"></script>
+		<script type="text/javascript" src="lib/bootstrap.min.js"></script>
 		<script type="text/javascript" src="lib/d3.min.js"></script>
-		<script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
-		<script src="https://unpkg.com/simple-statistics@2.5.0/dist/simple-statistics.js"></script>
-		<script type="text/javascript" src="js/topojson.js"></script>
-		<script type="text/javascript" src="lib/d3.js"></script>
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="lib/d3-legend.min.js"></script>
+		<script type="text/javascript" src="lib/topojson.min.js"></script>
+		<script type="text/javascript" src="lib/simple-statistics.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
