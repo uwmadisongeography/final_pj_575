@@ -1,23 +1,6 @@
+//wrap everything in a self-executing anonymous function to move to local scope
 (function(){
-
-//global variables
-var attrArray = ["2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013"]; //list of attributes
-var expressed = attrArray[0]; //initial attribute
-
-//chart frame dimensions
-var chartWidth = window.innerWidth * 0.425,
-    chartHeight = 473,
-    leftPadding = 35,
-    rightPadding = 2,
-    topBottomPadding = 5,
-    chartInnerWidth = chartWidth - leftPadding - rightPadding,
-    chartInnerHeight = chartHeight - topBottomPadding * 2,
-    translate = "translate(" + leftPadding + "," + topBottomPadding + ")";
-
-//create a scale to size bars proportionally to frame
-var yScale = d3.scaleLinear()
-    .range([chartHeight, 0])
-    .domain([0, 25000]);
+var airports,map;
 
 //begin script when window loads
 window.onload = setMap();
@@ -26,145 +9,193 @@ window.onload = setMap();
 function setMap(){
 
     //map frame dimensions
-    var width = window.innerWidth * 0.5,
-        height = window.innerHeight * 0.5;
+    var width = $("#mapWindow").innerWidth(),
+        height = 460;
 
     //create new svg container for the map
-    var map = d3.select("#mapDiv")
+    map = d3.select("#mapWindow")
         .append("svg")
         .attr("class", "map")
         .attr("width", width)
         .attr("height", height);
 
+    
+
     //create Albers equal area conic projection
     var projection = d3.geoAlbers()
-        .center([-7, 50])
+        .center([-0.8, 39.96])
         .rotate([93.73, 0.91, 0])
         .parallels([35.68, 45.50])
         .scale(880)
         .translate([width / 2, height / 2]);
 
-    var path = d3.geoPath()
+    //Azimuthal
+    // var projection = d3.geo.azimuthal()
+    // .mode("equidistant")
+    // .origin([-98, 38])
+    // .scale(1400)
+    // .translate([640, 360]);
+
+    path = d3.geoPath()
         .projection(projection);
 
     //use d3.queue to parallelize asynchronous data loading
     d3.queue()
-        .defer(d3.csv, "data/EnergyUse.csv") //load attributes from csv
-        .defer(d3.json, "data/states.topojson") //load background spatial data
+        .defer(d3.json, "data/airports.json") //load airpots
+        .defer(d3.json, "data/states.topojson") //load background states
         .await(callback);
 
-    function callback(error, csvData, states){
+    function callback(error,airports,states){
+        //Translate the topojson
+        var states_topo = topojson.feature(states, states.objects.collection);
 
-        //translate countries TopoJSON
-        var allStates = topojson.feature(states, states.objects.collection).features;
+        for (i = 0; i < airports.features.length; i++) {
+            var location = [+airports.features[i].properties.lng, +airports.features[i].properties.lat]
+            var position = projection(location)
+            airports.features[i].properties["position"] = position
+        }
+        //Generate map
+        setStateOverlay(states_topo, map, path);
+        //setAirports(airports,map);
 
-        //add world countries to map
-        var states = map.append("path")
-            .datum(allStates)
-            .attr("class", "states")
-            .attr("d", path);
-
-        // //join csv data to GeoJSON enumeration units
-        // States = joinData(worldCountries, csvData);
-
-        //create the color scale
-        var colorScale = makeColorScale(csvData);
-
-        //add enumeration units to the map
-        setEnumerationUnits(allStates, map, path, colorScale);
+        
+            
+     
     };
-
-}; //end of setMap
-
-function joinData(worldCountries, csvData){
-    //loop through csv to assign each set of csv attribute values to geojson region
-    for (var i=0; i<csvData.length; i++){
-        var csvRegion = csvData[i]; //the current region
-        var csvKey = csvRegion.name; //the CSV primary key
-
-        //loop through geojson regions to find correct region
-        for (var a=0; a<worldCountries.length; a++){
-
-            var geojsonProps = worldCountries[a].properties; //the current region geojson properties
-            var geojsonKey = geojsonProps.NAME; //the geojson primary key
-
-            //where primary keys match, transfer csv data to geojson properties object
-            if (geojsonKey == csvKey){
-
-                //assign all attributes and values
-                attrArray.forEach(function(attr){
-                    var val = parseFloat(csvRegion[attr]); //get csv attribute value
-                    geojsonProps[attr] = val; //assign attribute and value to geojson properties
-                });
-            };
-        };
-    };
-    return worldCountries;
 };
 
-function setEnumerationUnits(allStates, map, path, colorScale){
+//add states to map
+function setStateOverlay(states_topo, map, path){
+    var states = map.append("path")
+        .datum(states_topo)
+        .attr("class", "states")
+        .attr("d", path);
+};
 
-    //add world regions to map
-    var regions = map.selectAll(".regions")
-        .data(allStates)
+//add airports to map
+function setAirports(airports, map){
+    var circles = map.append("svg")
+        .attr("id", "circles");
+    circles.selectAll("circles")
+        .data(airports.features)
         .enter()
-        .append("path")
-        .attr("class", function(d){
-            return "regions " + d.properties.FID;
-        })
-        .attr("d", path)
-        .style("fill", function(d){
-            return choropleth(d.properties, colorScale);
-        })
-        var desc = regions.append("desc")
-            .text('{"stroke": "#818080", "stroke-width": "0.5px"}');
+        .append("circle")
+            .attr('cx', function(d) {return d.properties.position[0]})
+            .attr('cy', function(d) { return d.properties.position[1]})
+            .attr("r", function(d) { return d.properties.rank/8; })
+            .attr("id",function(d) { return d.properties.iata});
+    //         .on("mouseover", function(d){
+    //             highlightAirport(d.properties);
+    //         })
+    //         .on("mouseout", function(d){
+    //             dehighlightAirport(d.properties)
+    //         });
+    // var desc = circles.append("desc")
+    //         .text('{"stroke": "white", "stroke-width": "0","stroke-opacity": "0"}'); 
+    getAirportDelays()   
 };
 
-//function to test for data value and return color
-function choropleth(props, colorScale){
-    //make sure attribute value is a number
-    var val = parseFloat(props[expressed]);
-    //if attribute value exists, assign a color; otherwise assign gray
-    if (typeof val == 'number' && !isNaN(val)){
-        return colorScale(val);
-    } else {
-        return "#d6d6d6";
-    };
-};
-
-//function to create color scale generator
-function makeColorScale(data){
-    var colorClasses = [
-        "#ffffb2",
-        "#fecc5c",
-        "#fd8d3c",
-        "#f03b20",
-        "#bd0026"
-    ];
-
-    //create color scale generator
-    var colorScale = d3.scaleThreshold()
-        .range(colorClasses);
-
-    //build array of all values of the expressed attribute
-    var domainArray = [];
-    for (var i=0; i<data.length; i++){
-        var val = parseFloat(data[i][expressed]);
-        domainArray.push(val);
-    };
-
-    //cluster data using ckmeans clustering algorithm to create natural breaks
-    var clusters = ss.ckmeans(domainArray, 5);
-    //reset domain array to cluster minimums
-    domainArray = clusters.map(function(d){
-        return d3.min(d);
+function getAirportDelays(){
+    $.ajax({
+        url: 'http://localhost:8081/airports',
+        data: {
+            type: 1,
+            fyr: 2014,
+            lyr: 2014,
+            fmth: 1,
+            lmth: 12,
+            fdow: 1,
+            ldow: 1,
+            airlines: eval([19393,19930]).join(",")
+        },
+        error: function() {
+            console.log("error");
+        },
+        dataType: 'json',
+        success: function(data) {
+            updateAirportDelays(data);
+        },
+        type: 'GET'
     });
-    //remove first value from domain array to create class breakpoints
-    domainArray.shift();
+}
 
-    //assign array of last 4 cluster minimums as domain
-    colorScale.domain(domainArray);
+function updateAirportDelays(response){
+    var circles = d3.selectAll("#circles")
+        .data(response)
+        .enter()
+        .append("circle")
+            .attr('cx', function(d) {return d.properties.position[0]})
+            .attr('cy', function(d) { return d.properties.position[1]})
+            .attr("r", function(d) { return d.properties.rank/8; })
+            .attr("id",function(d) { return d.properties.iata});
 
-    return colorScale;
+    for (i = 0; i < response.data.length; i++) {
+        var circle = circles.select("#"+ response.data[i].name)
+            .data(response)
+            .attr("r", function(d) { return d.data[i].stats.delayed/8;});
+    }
+}
+
+    //     var data = [airports,response]
+    //     var circles d3.selectAll("circles")
+    //         .data(data)
+    //         .enter()
+    //         .append("circle")
+    //             .attr('cx', function(d) {return d.properties.position[0]})
+    //             .attr('cy', function(d) { return d.properties.position[1]})
+    //             .attr("r", function(d) { return d.properties.rank/8; })
+    //             .sort(function(a, b) { return b.properties.rank - a.properties.rank; })
+    //             .attr("id",function(d) { return d.properties.iata});
+
+
+    // var circles = d3.selectAll("#circles").each(
+    //     function(i){
+    //         var circle
+    //     }
+
+
+
+    //     )
+    //     .attr("r", function(response){
+
+
+    //     })
+
+function highlightAirport(props){
+    //change stroke
+    var selected = d3.selectAll("#" + props.iata)
+        .style("stroke", "yellow")
+        .style("stroke-width", "5")
+        .style("stroke-opacity", "1");
+
+    //call set label
+    //setLabel(props);
+
 };
+
+function dehighlightAirport(props){
+    var selected = d3.selectAll("#" + props.iata)
+        .style("stroke", function(){
+            return getStyle(this, "stroke")
+        })
+        .style("stroke-width", function(){
+            return getStyle(this, "stroke-width")
+        });
+
+    // d3.select(".infolabel")
+    //     .remove();
+
+    function getStyle(element, styleName){
+        var styleText = d3.select(element)
+            .select("desc")
+            .text();
+
+        var styleObject = JSON.parse(styleText);
+
+        return styleObject[styleName];
+    };
+};
+
+
+
 })();
