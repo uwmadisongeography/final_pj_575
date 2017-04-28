@@ -3,8 +3,8 @@
 
 var map,projection;
 
-var airportsURL = 'http://localhost:4040/airports'
-var routesURL = 'http://localhost:4040/routes'
+var airportsURL = 'http://144.92.235.47:4040/airports'
+var routesURL = 'http://144.92.235.47:4040/routes'
 
 
 //begin script when window loads
