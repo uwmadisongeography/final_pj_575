@@ -1,0 +1,35 @@
+This is the current API metadata 4/23/17
+
+##For getting delay information about the airports
+/airports
+#Parameters
+type: 1 for percent delayed, 0 for average delay
+fyr: The starting year 2014-2016
+lyr: The ending year 2014-2016
+fmth: The starting month 1-12
+lmth: The ending month 1-12
+fdow: The starting day of week 1=Monday - 7=Sunday
+ldow: The ending day of week 1=Monday - 7=Sunday
+airline: The list of airline codes, ex. 19393,19790 (19393:"Southwest",19690:"Hawaiian",19790:"Delta",19805:"American",19930:"Alaska",19977:"United",20304:"SkyWest",20366:"ExpressJet",20398:"Envoy",20409:"JetBlue",20416:"Spirit", 20436:"Frontier",21171:"Virgin America")
+
+Sample:
+To get Monday,April,2014 airport delay data as average delay for all airlines you would use:
+/airports?type=0&fyr=2014&lyr=2014&fmth=4&lmth=4&fdow=1&ldow=1&airlines=19393,19690,19790,19805,19930,19977,20304,20366,20398,20409,20416,20436,21171
+
+
+##For getting delay information about routes to an airport
+/routes
+#Parameters
+type: 1 for percent delayed, 0 for average delay
+fyr: The starting year 2014-2016
+lyr: The ending year 2014-2016
+fmth: The starting month 1-12
+lmth: The ending month 1-12
+fdow: The starting day of week 1=Monday - 7=Sunday
+ldow: The ending day of week 1=Monday - 7=Sunday
+airline: The list of airline codes, ex. 19393,19790 (19393:"Southwest",19690:"Hawaiian",19790:"Delta",19805:"American",19930:"Alaska",19977:"United",20304:"SkyWest",20366:"ExpressJet",20398:"Envoy",20409:"JetBlue",20416:"Spirit", 20436:"Frontier",21171:"Virgin America")
+dest: The destination airport 3-letter code ex. ORD=Chicago O'Hare
+
+Sample:
+To get Monday,April,2014 route delay data as average delay for all airlines at Milwaukee (MKE) you would use:
+/routes?type=0&fyr=2014&lyr=2014&fmth=4&lmth=4&fdow=1&ldow=1&airlines=19393,19690,19790,19805,19930,19977,20304,20366,20398,20409,20416,20436,21171&dest=MKE

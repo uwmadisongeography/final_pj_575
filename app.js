@@ -5,17 +5,29 @@ var pg = require("pg");
 var pgp = require('pg-promise')();
 var cors = require('cors');
 
+<<<<<<< HEAD
 app.use(cors());
 app.options('*', cors());
+=======
+app.use(cors({origin: 'http://localhost:8000'}));
+>>>>>>> origin/master
 
 function createDBConnection(){
 	//returns a database connection
 	var cn = {
+<<<<<<< HEAD
 		host: 'geo-gradserver.shc.wisc.edu',
 		port: 5432, //default
 		database: 'flightdelays',
 		user: 'flightdelays',
 		password: '$h0sh0n3!'
+=======
+		host: 'localhost',
+		port: 5432, //default
+		database: 'delay',
+		user: 'postgres',
+		password: 'postgres'
+>>>>>>> origin/master
 	};
 	var db = pgp(cn); //do the connection using pg-promise library
 	return db
@@ -28,8 +40,12 @@ function createAirportList(data,type){
 	var out = []
 	if (type == 1){//Percent delayed
 		for (var i=0; i < data.length; i++) {//Loop through query results
+<<<<<<< HEAD
 			airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
+=======
+			airport = {"name":data[i].origincode,
+>>>>>>> origin/master
 				"lat":data[i].originlat,
 				"lng":data[i].originlng,
 				"stats":{
@@ -49,8 +65,12 @@ function createAirportList(data,type){
 		}
 	}else{
 		for (var i=0; i < data.length; i++) {//Loop through query results
+<<<<<<< HEAD
 			airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
+=======
+			airport = {"name":data[i].origincode,
+>>>>>>> origin/master
 				"lat":data[i].originlat,
 				"lng":data[i].originlng,
 				"stats":{
@@ -73,9 +93,13 @@ function createAirportListRoutes(data,type){ //Only difference is the changing o
 	var out = []
 	if (type == 1){//Percent delayed
 		for (var i=0; i < data.length; i++) {//Loop through query results
+<<<<<<< HEAD
 			airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"destname": data[i].destname,
+=======
+			airport = {"name":data[i].origincode,
+>>>>>>> origin/master
 				"originlat":data[i].originlat,
 				"originlng":data[i].originlng,
 				"destlat":data[i].destlat,
@@ -97,9 +121,13 @@ function createAirportListRoutes(data,type){ //Only difference is the changing o
 		}
 	}else{
 		for (var i=0; i < data.length; i++) {//Loop through query results
+<<<<<<< HEAD
 			airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"destname": data[i].destname,
+=======
+			airport = {"name":data[i].origincode,
+>>>>>>> origin/master
 				"originlat":data[i].originlat,
 				"originlng":data[i].originlng,
 				"destlat":data[i].destlat,
@@ -181,17 +209,28 @@ app.get('/airports', function (req, res) {
 
 	//Write query based on stats type
 	if (type == 1){
+<<<<<<< HEAD
 		sql1 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS numweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,originlat,originlng,originname FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY origincode,originlat,originlng,originname ORDER BY origincode"
 		sql2 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
 	}else {
 		sql1 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,originlat,originlng,originname FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY origincode,originlat,originlng,originname ORDER BY origincode"
+=======
+		sql1 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS numweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,originlat,originlng FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY origincode,originlat,originlng ORDER BY origincode"
+		sql2 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
+	}else {
+		sql1 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,originlat,originlng FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY origincode,originlat,originlng ORDER BY origincode"
+>>>>>>> origin/master
 		sql2 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
 	}
 
     //Define variables
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline]
 	//execute the query
+<<<<<<< HEAD
 	db.task(function(t) {
+=======
+	db.task(t => {
+>>>>>>> origin/master
 		return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)
@@ -237,17 +276,28 @@ app.get('/routes', function (req, res) {
 
 	//Write query based on stats type
 	if (type == 1){
+<<<<<<< HEAD
 		sql1 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,originlat,originlng,destlat,destlng,originname,destname FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY origincode,originlat,originlng,destlat,destlng,originname,destname ORDER BY origincode"
 		sql2 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
 	}else {
 		sql1 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,originlat,originlng,destlat,destlng,originname,destname FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY origincode,originlat,originlng,destlat,destlng,originname,destname ORDER BY origincode"
+=======
+		sql1 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,originlat,originlng,destlat,destlng FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY origincode,originlat,originlng,destlat,destlng ORDER BY origincode"
+		sql2 = "SELECT COALESCE(round((SUM(numontime)::float/NULLIF(SUM(numflights),0))*100),0) AS perontime,COALESCE(round((SUM(numcancelled)::float/NULLIF(SUM(numflights),0))*100),0) AS percancelled,COALESCE(round((SUM(numdiverted)::float/NULLIF(SUM(numflights),0))*100),0) AS perdiverted,COALESCE(round((SUM(numdelayed)::float/NULLIF(SUM(numflights),0))*100),0) AS perdelayed,COALESCE(round((SUM(numcarrierd)::float/NULLIF(SUM(numflights),0))*100),0) AS percarrierd,COALESCE(round((SUM(numweatherd)::float/NULLIF(SUM(numflights),0))*100),0) AS perweatherd,COALESCE(round((SUM(numnasd)::float/NULLIF(SUM(numflights),0))*100),0) AS pernasd,COALESCE(round((SUM(numsecurityd)::float/NULLIF(SUM(numflights),0))*100),0) AS persecurityd,COALESCE(round((SUM(numlateaircraftd)::float/NULLIF(SUM(numflights),0))*100),0) AS perlateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
+	}else {
+		sql1 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,originlat,originlng,destlat,destlng FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY origincode,originlat,originlng,destlat,destlng ORDER BY origincode"
+>>>>>>> origin/master
 		sql2 = "SELECT COALESCE(round(SUM(numdelayed*avgdelay)::float/NULLIF(SUM(numdelayed),0)),0) AS avgDelayed,COALESCE(round(SUM(numcarrierd*carrierd)::float/NULLIF(SUM(numcarrierd),0)),0) AS avgcarrierd,COALESCE(round(SUM(numweatherd*weatherd)::float/NULLIF(SUM(numweatherd),0)),0) AS avgweatherd,COALESCE(round(SUM(numnasd*nasd)::float/NULLIF(SUM(numnasd),0)),0) AS avgnasd,COALESCE(round(SUM(numsecurityd*securityd)::float/NULLIF(SUM(numsecurityd),0)),0) AS avgsecurityd,COALESCE(round(SUM(numlateaircraftd*lateaircraftd)::float/NULLIF(SUM(numlateaircraftd),0)),0) AS avglateaircraftd,origincode,airlinename FROM delays2 WHERE (year BETWEEN $1 AND $2) AND (month BETWEEN $3 AND $4) AND (dayofweek BETWEEN $5 AND $6) AND airlineid IN ($7:csv) AND destcode = $8 GROUP BY airlinename,origincode ORDER BY origincode,airlinename"
 	}
 
     //Define variables
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline,dest]
 	//execute the query
+<<<<<<< HEAD
 	db.task(function(t) {
+=======
+	db.task(t => {
+>>>>>>> origin/master
 		return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)
@@ -279,6 +329,10 @@ app.get('/routes', function (req, res) {
 })
 
 // start the service
+<<<<<<< HEAD
 app.listen(4040, function () {
+=======
+app.listen(8081, function () {
+>>>>>>> origin/master
   console.log('Server running...')
 })
