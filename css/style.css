@@ -242,6 +242,243 @@ h3.title{
     stroke-width: 0.5px;
 }
 
+#myBody {
+    font-family: Roboto;
+}
+
+span.OverviewBoxTitle{
+	//position:relative;
+	//left:28%;
+	text-align:center;
+	font-size: 25px;
+	font-weight:bold;
+}
+
+span a{
+	color:white;
+}
+
+.OverviewBox{
+	/*background-image:url('../img/boeing.jpg');*/
+	background:linear-gradient(#5fbfef,#519adb);
+	box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5);
+	padding:15px;
+	font-family:Gill Sans MT;
+	font-size:20px;
+	position:absolute;
+	//z-index:2932939239293923;
+	top:30%;
+	left:30%;
+	width:50%;
+	height:35%;
+	border-radius:25px;
+	//border-style:ridge;
+}
+
+.OverviewButton{
+	//position:relative;
+	//top:65%;
+	//left:38%;
+	width:100%;
+	height:10%;
+	font-size:15px;
+	font-weight:bold;
+}
+
+.navbar-brand{
+	position:absolute;
+	/*left:0.5%;*/
+}
+
+.navbar-default .navbar-brand{  									
+	font-family:Gill Sans MT;
+	font-size: 25px;
+	font-weight:bold;
+}
+
+.container1{
+	/*background:linear-gradient(#2b669a,#2F3034);*/
+	background:linear-gradient(#0a84c1,#2b669a);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+}
+
+.navbar-button{
+	font-family:Gill Sans MT;
+	font-size:20px;
+	position:absolute;
+	left:-60%;
+	//display:block;
+	color:white;
+}
+
+.navbar2{
+	position:absolute;
+	top:10%;
+	left:0%;
+}
+
+#navbar-list-group{
+	height:10%;
+	min-width: 100px !important;
+	width: 100px;
+	z-index:2932939239293923;
+	margin:0px;
+	padding:0px;
+	border-style:ridge;
+}
+
+.container-footer{
+	position:absolute;
+	bottom:0px;
+	width:100%;
+	height:3%;
+	font-family:Gill Sans MT;
+	background:linear-gradient(#0a84c1,#2b669a);
+}
+
+.foot-button{
+	position:absolute;
+	color:black;
+	top:15%;
+	left:3%;
+	color:white;
+}
+
+.pull-middle{
+	position:absolute;
+	top:15%;
+	left:36%
+}
+
+.control-panel{
+	width:300px;
+	/*background-color: white;*/
+	/*position: absolute;*/
+	/*z-index:1000000002383823;*/
+	/*top: 10%;*/
+	/*left: 100px;*/
+	/*display: none;*/
+	//border-style:ridge;
+	/*background-image:url('../img/cloudground.jpg');*/
+	background:linear-gradient(#5fbfef,#519adb);
+}
+
+h3.title{
+	font-family:Gill Sans MT;
+	font-size:120%;
+	text-align:left;
+	/*padding-top:10px;*/
+}
+
+.resetter{
+	cursor:pointer;
+	position:absolute;
+	border-radius:25px;
+	width:50;
+	height:50;
+}
+
+.hovered{
+	/*background-color:#519adb;*/
+	background:linear-gradient(#3a8ad1,#81cef4);
+	cursor: pointer;
+}
+
+.return_default1{
+	top:10%;
+	left:90%;
+}
+
+.return_default2{
+	top:5%;
+	left:90%;
+}
+
+.return_default3{
+	top:5%;
+	left:90%;
+}
+
+.return_default4{
+	top:5%;
+	left:90%;
+}
+
+#search-panel{
+	height:9.7%;
+	font-family:Gill Sans MT;
+	padding-left:20px;
+	padding-right:20px;
+	position:absolute;
+	top:5.3%;
+	left:0%;
+}
+
+#proportion-panel{
+	height:12%;
+	font-family:Gill Sans MT;
+	padding-left:20px;
+	padding-right:20px;
+	position:absolute;
+	top:15%;
+	left:0%;
+}
+
+#time-panel{
+	height:21%;
+	font-family:Gill Sans MT;
+	padding-left:20px;
+	padding-right:20px;
+	position:absolute;
+	top:27%;
+	left:0%;
+}
+
+#delay-panel{
+	height:23%;
+	font-family:Gill Sans MT;
+	padding-left:20px;
+	padding-right:20px;
+	position:absolute;
+	top:48%;
+	left:0%;
+}
+
+#airline-panel{
+	height:26%;
+	font-family:Gill Sans MT;
+	padding-left:20px;
+	padding-right:20px;
+	position:absolute;
+	top:71%;
+	left:0%;
+}
+
+#checkboxAirline{
+	float:left;
+	width:50%;
+}
+
+#mapDiv{
+	position:absolute;
+	margin-bottom: 20px;
+	top:3%;
+	left:13%;
+	width:85%;
+	height:95%;
+}
+
+.map{
+	width:100%;
+	height:100%;
+}
+
+.states {
+    fill-opacity: 0;
+    stroke: #666666;
+    stroke-width: 0.5px;
+}
+
 .regions {
     stroke:#fcfcfc;
     stroke-width: 0.5px;
@@ -280,9 +517,41 @@ h3.title{
 	padding:0.5%;
 }
 
+#reset {
+    position:absolute;
+    top:5px;
+    right:20px;
+    z-index: 10;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 4px #999;
+    background-color:white;
+    border-radius: 5px;
+    margin-top: 1px;
+    margin-right: 2px;
+}
+
+.site-footer{
+	display:inline;
+	padding:0.5%;
+}
 .arc {
     fill: none;
     stroke: #252525;
     stroke-linejoin: round;
     cursor: pointer;
+
+#reset:hover {
+    background-color:black;
+    color:white;
+}
+
+#myFooter {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

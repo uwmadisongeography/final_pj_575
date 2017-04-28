@@ -28,7 +28,7 @@ function createAirportList(data,type){
 	var out = []
 	if (type == 1){//Percent delayed
 		for (var i=0; i < data.length; i++) {//Loop through query results
-			airport = {"origincode":data[i].origincode,
+			  airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"lat":data[i].originlat,
 				"lng":data[i].originlng,
@@ -49,7 +49,7 @@ function createAirportList(data,type){
 		}
 	}else{
 		for (var i=0; i < data.length; i++) {//Loop through query results
-			airport = {"origincode":data[i].origincode,
+			  airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"lat":data[i].originlat,
 				"lng":data[i].originlng,
@@ -73,7 +73,7 @@ function createAirportListRoutes(data,type){ //Only difference is the changing o
 	var out = []
 	if (type == 1){//Percent delayed
 		for (var i=0; i < data.length; i++) {//Loop through query results
-			airport = {"origincode":data[i].origincode,
+			  airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"destname": data[i].destname,
 				"originlat":data[i].originlat,
@@ -97,7 +97,7 @@ function createAirportListRoutes(data,type){ //Only difference is the changing o
 		}
 	}else{
 		for (var i=0; i < data.length; i++) {//Loop through query results
-			airport = {"origincode":data[i].origincode,
+			  airport = {"origincode":data[i].origincode,
 				"originname": data[i].originname,
 				"destname": data[i].destname,
 				"originlat":data[i].originlat,
@@ -192,7 +192,7 @@ app.get('/airports', function (req, res) {
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline]
 	//execute the query
 	db.task(function(t) {
-		return t.batch([
+		  return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)
 		]);
@@ -248,7 +248,7 @@ app.get('/routes', function (req, res) {
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline,dest]
 	//execute the query
 	db.task(function(t) {
-		return t.batch([
+		  return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)
 		]);
