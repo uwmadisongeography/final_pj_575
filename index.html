@@ -7,15 +7,16 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		
-		<title>U.S. Delay Flight Tracker</title>
+		<title><>U.S. Delay Flight Tracker</title>
 		
 		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 		
 		<!-- Custom styles for this project -->
 		<link rel="stylesheet" href="css/style.css">
 		<link rel="stylesheet" href="lib/jRange/jquery.range.css">
+		<link rel="stylesheet" href="css/animate.css">
 	</head>
 	
 	<body>
@@ -27,7 +28,7 @@
 						<span class="glyphicon glyphicon-menu-hamburger" style="color:gray"></span>
 						<span class="menu" style="color:gray"></span>
 					</button-->
-					<p class="navbar-brand">U.S. Delay Flight Tracker</p>
+					<p class="navbar-brand"><font color="#ADD8E6">U.S. Delay Flight Tracker</font></p>
 				</div>
 				<!--div class="navbar-button1">
 					<p>Make Your Itinerary Smart Today!<p>
@@ -46,7 +47,7 @@
 				<div id="mapDiv" class="col-lg-12"></div>
 			</div>
 		
-			<div class="navbar2">
+			<!--div class="navbar2">
 				<ul class="list-group" id="navbar-list-group">
 					<li class="list-group-item nav-item" id="navbar-return" data-panel="return" data-toggle="tooltip" title="Return">
 						<img src="img/return.png" class="img-responsive li-img">
@@ -72,14 +73,13 @@
 						<img src="img/airline.png" class="img-responsive li-img">
 					</li>
 				</ul>
-			</div>
+			</div-->
 			
-			<div id="return-panel" class="navbar-panel control-panel">
-				<!--h3 class="title">Overview</h3-->
+			<!--div id="return-panel" class="navbar-panel control-panel">
 				<div>
 					<input type="reset" id="return_default">
 				</div>
-			</div>
+			</div-->
 			
 			<div id="search-panel" class="navbar-panel control-panel">
 				<h3 class="title">Search An Airport:</h3>
@@ -98,6 +98,9 @@
 					<input type="radio" id="time" name="proportional_symbol" value=0>
 					<label for="time">Average Delay Time</label>
 				</div>
+				<div class="resetter return_default1" title="Reset">
+					<img src="img/return.png" width="20" height="20">
+				</div>
 			</div>
 			
 			<div id="time-panel" class="navbar-panel control-panel">
@@ -114,6 +117,9 @@
 				<h3 class="title">Filter Day(s):</h3>
 				<div>
 					<input class="range-slider3" id="dayInput" type="hidden" value="1,4"/>
+				</div>
+				<div class="resetter return_default2" title="Reset">
+					<img src="img/return.png" width="20" height="20">
 				</div>
 			</div>
 			
@@ -138,6 +144,9 @@
 					
 					<input type="radio" id="all" name="delay" value="all" checked="checked">
 					<label for="arriving_late">Show All</label><br>
+				</div>
+				<div class="resetter return_default3" title="Reset">
+					<img src="img/return.png" width="20" height="20">
 				</div>
 			</div>
 			
@@ -187,6 +196,9 @@
 					
 					<input type="button" name="checkBtn" class="check" value="Uncheck All">
 				</div>
+				<div class="resetter return_default4" title="Reset">
+					<img src="img/return.png" width="20" height="20">
+				</div>
 			</div>
 		</div>
 		
@@ -194,9 +206,9 @@
 		
 		<footer class="site-footer">
 			<div class="container-footer">
-				<div class="pull-middle">Version: 1.0&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Last updated: MM/DD/YY &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Best viewed on a large PC screen (e.g. Google Chrome, Fire Fox)</div>
-				<div class="foot-button"><a href="abouts/help.html" target="_blank"><font color="black">Tutorial</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-				<a href="https://goo.gl/forms/PFsUQonm6HqihesA3" target="_blank"><font color="black">Bug Report</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</div>
+				<div class="pull-middle"><font color="white">Version: 1.0&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Last updated: MM/DD/YY &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;Best viewed on a large PC screen (e.g. Google Chrome, FireFox)</font></div>
+				<div class="foot-button"><a href="tutorial.html" target="_blank"><font color="white">Tutorial</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+				<a href="https://goo.gl/forms/EoBBpJzzDfpKwNXy2" target="_blank"><font color="white">Bug Report</font></a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</div>
 			</div>
 		</footer>
 		
@@ -204,6 +216,7 @@
 		<script type="text/javascript" src="lib/jquery-3.1.1.js"></script>
 		<script type="text/javascript" src="lib/jRange/jquery.range.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="lib/d3.v3.min.js"></script>
 		<script type="text/javascript" src="lib/d3/d3.js"></script>
 		<script type="text/javascript" src="lib/d3-queue/d3-queue.js"></script>
 		<script type="text/javascript" src="lib/topojson/topojson.js"></script>

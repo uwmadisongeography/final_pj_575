@@ -191,7 +191,7 @@ app.get('/airports', function (req, res) {
     //Define variables
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline]
 	//execute the query
-	db.task(function(t) {
+	db.task(t => {
 		return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)
@@ -247,7 +247,7 @@ app.get('/routes', function (req, res) {
     //Define variables
     vars = [fyr,lyr,fmth,lmth,fdow,ldow,airline,dest]
 	//execute the query
-	db.task(function(t) {
+	db.task(t => {
 		return t.batch([
 			t.any(sql1, vars),
 			t.any(sql2, vars)

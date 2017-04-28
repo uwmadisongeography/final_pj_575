@@ -17,18 +17,25 @@ span.OverviewBoxTitle{
 	font-weight:bold;
 }
 
+span a{
+	color:white;
+}
+
 .OverviewBox{
-	background-image:url('../img/cloudground.jpg');
+	/*background-image:url('../img/boeing.jpg');*/
+	background:linear-gradient(#5fbfef,#519adb);
+	box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.5);
 	padding:15px;
 	font-family:Gill Sans MT;
 	font-size:20px;
 	position:absolute;
-	top:20%;
-	left:25%;
+	//z-index:2932939239293923;
+	top:30%;
+	left:30%;
 	width:50%;
 	height:35%;
 	border-radius:25px;
-	border-style:ridge;
+	//border-style:ridge;
 }
 
 .OverviewButton{
@@ -43,7 +50,7 @@ span.OverviewBoxTitle{
 
 .navbar-brand{
 	position:absolute;
-	left:0.5%;
+	/*left:0.5%;*/
 }
 
 .navbar-default .navbar-brand{  									
@@ -53,7 +60,9 @@ span.OverviewBoxTitle{
 }
 
 .container1{
-	background-image:url('../img/cloudground.jpg');
+	/*background:linear-gradient(#2b669a,#2F3034);*/
+	background:linear-gradient(#0a84c1,#2b669a);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
 }
 
 .navbar-button{
@@ -61,6 +70,8 @@ span.OverviewBoxTitle{
 	font-size:20px;
 	position:absolute;
 	left:-60%;
+	//display:block;
+	color:white;
 }
 
 .navbar2{
@@ -79,25 +90,21 @@ span.OverviewBoxTitle{
 	border-style:ridge;
 }
 
-.navbar-hovered{
-	background-color: #ccc;
-	cursor: pointer;
-}
-
 .container-footer{
 	position:absolute;
 	bottom:0px;
 	width:100%;
 	height:3%;
 	font-family:Gill Sans MT;
-	background-image:url('../img/cloudground.jpg');
+	background:linear-gradient(#0a84c1,#2b669a);
 }
 
 .foot-button{
 	position:absolute;
 	color:black;
 	top:15%;
-	left:5%;
+	left:3%;
+	color:white;
 }
 
 .pull-middle{
@@ -108,63 +115,106 @@ span.OverviewBoxTitle{
 
 .control-panel{
 	width:300px;
-	background-color: white;
-	position: absolute;
-	z-index:1000000002383823;
-	top: 10%;
-	left: 100px;
-	display: none;
-	border-style:ridge;
-	background-image:url('../img/cloudground.jpg');
+	/*background-color: white;*/
+	/*position: absolute;*/
+	/*z-index:1000000002383823;*/
+	/*top: 10%;*/
+	/*left: 100px;*/
+	/*display: none;*/
+	//border-style:ridge;
+	/*background-image:url('../img/cloudground.jpg');*/
+	background:linear-gradient(#5fbfef,#519adb);
 }
 
 h3.title{
 	font-family:Gill Sans MT;
 	font-size:120%;
 	text-align:left;
-	padding-top:10px;
+	/*padding-top:10px;*/
 }
-/*
-#intro-panel{
-	height:50%;
-	font-family:Gill Sans MT;
-	padding-left:20px;
-	padding-right:20px;
+
+.resetter{
+	cursor:pointer;
+	position:absolute;
+	border-radius:25px;
+	width:50;
+	height:50;
 }
-*/
+
+.hovered{
+	/*background-color:#519adb;*/
+	background:linear-gradient(#3a8ad1,#81cef4);
+	cursor: pointer;
+}
+
+.return_default1{
+	top:10%;
+	left:90%;
+}
+
+.return_default2{
+	top:5%;
+	left:90%;
+}
+
+.return_default3{
+	top:5%;
+	left:90%;
+}
+
+.return_default4{
+	top:5%;
+	left:90%;
+}
+
 #search-panel{
-	height:13%;
+	height:9.7%;
 	font-family:Gill Sans MT;
 	padding-left:20px;
 	padding-right:20px;
+	position:absolute;
+	top:5.3%;
+	left:0%;
 }
 
 #proportion-panel{
-	height:15%;
+	height:12%;
 	font-family:Gill Sans MT;
 	padding-left:20px;
 	padding-right:20px;
+	position:absolute;
+	top:15%;
+	left:0%;
 }
 
 #time-panel{
-	height:28%;
+	height:21%;
 	font-family:Gill Sans MT;
 	padding-left:20px;
 	padding-right:20px;
+	position:absolute;
+	top:27%;
+	left:0%;
 }
 
 #delay-panel{
-	height:28%;
+	height:23%;
 	font-family:Gill Sans MT;
 	padding-left:20px;
 	padding-right:20px;
+	position:absolute;
+	top:48%;
+	left:0%;
 }
 
 #airline-panel{
-	height:30%;
+	height:26%;
 	font-family:Gill Sans MT;
 	padding-left:20px;
 	padding-right:20px;
+	position:absolute;
+	top:71%;
+	left:0%;
 }
 
 #checkboxAirline{
@@ -172,13 +222,13 @@ h3.title{
 	width:50%;
 }
 
-#mapDiv {
+#mapDiv{
 	position:absolute;
 	margin-bottom: 20px;
-	top:1%;
-	left:1%;
-	width:100%;
-	height:100%;
+	top:3%;
+	left:13%;
+	width:85%;
+	height:95%;
 }
 
 .map{
@@ -228,4 +278,11 @@ h3.title{
 .site-footer{
 	display:inline;
 	padding:0.5%;
+}
+
+.arc {
+    fill: none;
+    stroke: #252525;
+    stroke-linejoin: round;
+    cursor: pointer;
 }
